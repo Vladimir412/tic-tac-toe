@@ -5,16 +5,19 @@ let flag = false;
 const newArray = Array.from(array)
 newArray.forEach(el => {
     el.addEventListener('click', function(e) {
-        
-        if (!flag && !checkDisplayBlock(el)) {
-            const element = getBlock(el, '.sign')
-            element.style.display = 'block'
-        } 
-        if (flag && !checkDisplayBlock(el)) {
-            const element = getBlock(el, '.circle')
-            element.style.display = 'block'
+        if (!el.hasAttribute('inert')) {
+            if (!flag && !checkDisplayBlock(el)) {
+                const element = getBlock(el, '.sign')
+                element.style.display = 'block'
+                el.setAttribute('inert', true)
+            } 
+            if (flag && !checkDisplayBlock(el)) {
+                const element = getBlock(el, '.circle')
+                element.style.display = 'block'
+                el.setAttribute('inert', true)
+            }
+            flag = !flag 
         }
-        flag = !flag
     })
 })
 
